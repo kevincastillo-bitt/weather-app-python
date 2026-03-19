@@ -1,18 +1,16 @@
-import requests
+city = input("Enter city name: ").strip().lower()
 
-city = input("Enter city name: ")
+weather_data = {
+    "buenos aires": {"temp": 22, "condition": "Sunny"},
+    "cordoba": {"temp": 18, "condition": "Cloudy"},
+    "rosario": {"temp": 20, "condition": "Windy"},
+    "mendoza": {"temp": 16, "condition": "Dry"},
+    "la plata": {"temp": 21, "condition": "Partly cloudy"}
+}
 
-api_key = "YOUR_API_KEY"
-url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-
-response = requests.get(url)
-data = response.json()
-
-if data["cod"] == 200:
-    temp = data["main"]["temp"]
-    description = data["weather"][0]["description"]
-    
-    print(f"Temperature: {temp}°C")
-    print(f"Condition: {description}")
+if city in weather_data:
+    print(f"City: {city.title()}")
+    print(f"Temperature: {weather_data[city]['temp']}°C")
+    print(f"Condition: {weather_data[city]['condition']}")
 else:
-    print("City not found")
+    print("City not found in local database.")
